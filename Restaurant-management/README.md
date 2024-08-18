@@ -1,4 +1,4 @@
-# restaurant-management
+# Restaurent management Application
 
 ## Overview
 
@@ -8,9 +8,9 @@ This is a web application designed for defect restaurent management. This docume
 
 To run the application, you'll need the following:
 
-### 1. Java Development Kit (JDK) 22
+### 1. Java Development Kit (JDK) 17
 
-The application is built using Java 22. Ensure you have JDK 22 installed on your machine. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or use an OpenJDK distribution.
+The application is built using Java 17. Ensure you have JDK 17 installed on your machine. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or use an OpenJDK distribution.
 
 ### 2. Apache Maven or Gradle
 
@@ -24,3 +24,5 @@ The application uses MySQL as its database. Ensure you have MySQL installed and 
 - Database URL: `jdbc:mysql://localhost:3306/semita?useSSL=false`
 - Username: `root`
 - Password: `admin`
+
+
