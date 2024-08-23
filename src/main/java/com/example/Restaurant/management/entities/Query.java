@@ -7,21 +7,22 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Query {
+public class Query extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long queryID;
 
-    private String queryText;
-    private String responseText;
-    private String status;
+    private String name;
+    private String email;
+    private String subject;
+    private String message;
 
-    @ManyToOne
-    @JoinColumn(name = "userID", nullable = false)
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "restaurantID", nullable = false)
-    private Restaurant restaurant;
+//    @ManyToOne
+//    @JoinColumn(name = "userID", nullable = false)
+//    private User user;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "restaurantID", nullable = false)
+//    private Restaurant restaurant;
 }
