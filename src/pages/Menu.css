@@ -1,0 +1,27 @@
+.menu-page header {
+    background-image:  url(../utils/img/menu-img.jpg) ;
+    background-size: cover;  /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image within the container */
+    height: 80vh;
+}
+
+/* Adjust the size of the menu images */
+.menu-page img {
+    max-width: 70%;  /* Ensure images do not exceed the width of their container */
+    height: auto;     /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers the container */
+}
+
+/* Add padding to images to ensure they look good on all screen sizes */
+.menu-page img {
+    padding: 15px;
+}
+
+/* Add some custom styling to the Menu heading */
+.menu-page header h1 {
+    font-family: 'Poppins', sans-serif; /* Stylish font */
+    font-size: 3rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

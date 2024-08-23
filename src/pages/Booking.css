@@ -1,0 +1,40 @@
+body {
+    margin: 0; /* Remove default margin */
+    background-color: black; /* Set the whole page background color to black */
+    color: white; /* Optional: Adjust text color for better visibility */
+}
+
+.contact-page {
+    min-height: 100vh; /* Ensure it takes up the full height of the viewport */
+}
+
+header {
+    padding: 30px;
+    text-align: center;
+    background-color: black; /* Ensure the header background is also black */
+}
+
+.container {
+    background-color: transparent; /* Make sure container does not override body background */
+}
+
+
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header h3 {
+    color: white;
+    font-weight: bold;
+}
+
+.reserve-table-page .container {
+    margin-top: 20px;
+}
+
+img {
+    object-fit: cover;
+}
