@@ -27,6 +27,10 @@ function App() {
               <Nav.Link as={Link} to="/booking" className='text-uppercase'>Booking</Nav.Link>
               <Nav.Link as={Link} to="/about" className='text-uppercase'>About</Nav.Link>
               <Nav.Link as={Link} to="/contact" className='text-uppercase'>Contact</Nav.Link>
+              {/* Add button for Orders */}
+              <Nav.Link as={Link} to="/orders" className='btn btn-primary text-white ms-2'>Orders</Nav.Link>
+              {/* Add button for Login */}
+              <Nav.Link as={Link} to="/login" className='btn btn-secondary text-white ms-2'>Login</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -38,6 +42,7 @@ function App() {
         <Route path='/booking' element={<Booking />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
+        {/* You can later add the Orders and Login routes here */}
       </Routes>
 
       <footer className='bg-dark text-white'>
