@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 public class ReservationDto {
 
-    private Long reservationID;
+    private Long reservationId;
     private String name;
     private String email;
     private LocalDate date;

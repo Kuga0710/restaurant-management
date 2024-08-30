@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Getter
 @Setter
@@ -21,9 +22,7 @@ public class User {
     private String password;
 
 
-////
-////    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-////    private Set<Order> orders = new HashSet<>();
+
 ////
 ////    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 ////    private Set<Reservation> reservations = new HashSet<>();
@@ -48,4 +47,10 @@ public class User {
 //
 //    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 //    private Payment payment;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> cartItems;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
 }

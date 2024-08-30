@@ -17,7 +17,7 @@ public class Reservation extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservationID;
+    private Long reservationId;
 
     private String name;
     private String email;

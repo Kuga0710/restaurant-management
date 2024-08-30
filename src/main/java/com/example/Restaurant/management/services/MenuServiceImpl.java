@@ -61,18 +61,38 @@ public class MenuServiceImpl implements MenuService {
         return menuRepository.save(menu);
     }
 
-
-
+//    @Override
+//    public MenuDto getMenuByName(String name) {
+//            return menuRepository.findByName(name)
+//                    .map(menu -> {
+//                        MenuDto menuDto = new MenuDto();
+//                        BeanUtils.copyProperties(menu, menuDto);
+//                        return menuDto;
+//                    })
+//                    .orElse(null);
+//    }
+//
+//
+//    @Override
+//    public List<MenuDto> getAllMenus() {
+//        return menuRepository.findAll().stream()
+//                .map(menu -> {
+//                    MenuDto menuDto = new MenuDto();
+//                    BeanUtils.copyProperties(menu, menuDto);
+//                    return menuDto;
+//                })
+//                .collect(Collectors.toList());
+//    }
 
     @Override
-    public List<MenuDto> getAllMenus() {
-        return menuRepository.findAll().stream()
-                .map(menu -> {
-                    MenuDto menuDto = new MenuDto();
-                    BeanUtils.copyProperties(menu, menuDto);
-                    return menuDto;
-                })
-                .collect(Collectors.toList());
+    public List<MenuDto> getMenus(String name) {
+        List<Menu> menus = menuRepository.findByNameOrAll(name);
+        return menus.stream().map(menu -> {
+            MenuDto menuDto = new MenuDto();
+            menuDto.setMenuId(menu.getServiceId());
+            BeanUtils.copyProperties(menu, menuDto);
+            return menuDto;
+        }).collect(Collectors.toList());
     }
 
     @Override

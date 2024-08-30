@@ -11,7 +11,7 @@ public class Query extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long queryID;
+    private Long queryId;
 
     private String name;
     private String email;

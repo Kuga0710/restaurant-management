@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class QueryDto {
 
-    private Long queryID;
+    private Long queryId;
     private String name;
     private String email;
     private String subject;

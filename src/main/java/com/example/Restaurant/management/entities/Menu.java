@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -11,7 +15,7 @@ public class Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceID;
+    private Long serviceId;
 
     private String name;
     private String description;
@@ -22,10 +26,9 @@ public class Menu {
     private byte[] image; // Store image data as byte array
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "reservationID")
-//    private Reservation reservation;
-//
-//    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
-//    private Set<OrderItem> orderItems = new HashSet<>();
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> cartItems;
+
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems;
 }

@@ -48,24 +48,24 @@ public class MenuController {
     }
 
 
-
     @GetMapping
-    public ResponseEntity<ResponseWrapper<List<MenuDto>>> getAllMenus() {
-        List<MenuDto> menus = menuService.getAllMenus();
-        if (menus != null && !menus.isEmpty()) {
-            return ResponseEntity.ok(new ResponseWrapper<>(
-                    RestApiResponseStatusCodes.SUCCESS.getCode(),
-                    ValidationMessages.RETRIEVED,
-                    menus
-            ));
-        } else {
+    public ResponseEntity<ResponseWrapper<List<MenuDto>>> getMenus(@RequestParam(required = false) String name) {
+        List<MenuDto> menus = menuService.getMenus(name);
+        if (menus.isEmpty() && name != null && !name.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseWrapper<>(
                     RestApiResponseStatusCodes.NOT_FOUND.getCode(),
                     ValidationMessages.RETRIEVED_FAILED,
                     null
             ));
         }
+        return ResponseEntity.ok(new ResponseWrapper<>(
+                RestApiResponseStatusCodes.SUCCESS.getCode(),
+                ValidationMessages.RETRIEVED,
+                menus
+        ));
     }
+
+
 
     @PutMapping("{id}")
     public ResponseEntity<ResponseWrapper<Menu>> updateMenu(@PathVariable("id") Long id, @RequestBody MenuDto menuDto) {

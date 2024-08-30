@@ -7,20 +7,22 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class OrderItem extends DateAudit{
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderItemId;
+    private Long cartId;
 
-    private Integer quantity;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    private Integer quantity=1;
 
     @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "menu_id", nullable = false)
     private Menu menu;
 
+
 }
+
