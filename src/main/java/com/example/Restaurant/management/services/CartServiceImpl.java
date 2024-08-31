@@ -11,6 +11,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CartServiceImpl implements CartService{
 
@@ -57,5 +59,11 @@ public class CartServiceImpl implements CartService{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<Cart> getAllCartsByUserId(Long userId) {
+        return cartRepository.findByUserId(userId);
+
     }
 }

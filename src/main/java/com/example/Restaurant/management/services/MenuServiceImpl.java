@@ -20,18 +20,6 @@ public class MenuServiceImpl implements MenuService {
     private MenuRepository menuRepository;
 
     @Override
-//    public Menu createMenu(MenuDto menuDto, MultipartFile file) {
-//        Menu menu = new Menu();
-//        BeanUtils.copyProperties(menuDto, menu);
-//
-//        try {
-//            menu.setImage(file.getBytes()); // Set the image data as byte array
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return menuRepository.save(menu);
-//
-//    }
     public Menu createMenu(MenuDto menuDto, MultipartFile file) {
         Menu menu = new Menu();
         BeanUtils.copyProperties(menuDto, menu);
@@ -39,12 +27,10 @@ public class MenuServiceImpl implements MenuService {
         if (file != null && !file.isEmpty()) {
             try {
                 byte[] imageBytes = file.getBytes();
-                // Log the size of the image bytes to ensure it's not empty
                 System.out.println("Image size: " + imageBytes.length);
 
                 menu.setImage(imageBytes);
 
-                // Check if the image was set correctly
                 if (menu.getImage() == null || menu.getImage().length == 0) {
                     throw new RuntimeException("Failed to set image bytes");
                 }
@@ -57,32 +43,8 @@ public class MenuServiceImpl implements MenuService {
             System.out.println("File is null or empty");
         }
 
-        // Continue with saving the menu
         return menuRepository.save(menu);
     }
-
-//    @Override
-//    public MenuDto getMenuByName(String name) {
-//            return menuRepository.findByName(name)
-//                    .map(menu -> {
-//                        MenuDto menuDto = new MenuDto();
-//                        BeanUtils.copyProperties(menu, menuDto);
-//                        return menuDto;
-//                    })
-//                    .orElse(null);
-//    }
-//
-//
-//    @Override
-//    public List<MenuDto> getAllMenus() {
-//        return menuRepository.findAll().stream()
-//                .map(menu -> {
-//                    MenuDto menuDto = new MenuDto();
-//                    BeanUtils.copyProperties(menu, menuDto);
-//                    return menuDto;
-//                })
-//                .collect(Collectors.toList());
-//    }
 
     @Override
     public List<MenuDto> getMenus(String name) {

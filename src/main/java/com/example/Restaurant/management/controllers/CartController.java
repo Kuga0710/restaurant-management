@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/cart")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -71,6 +73,25 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper<>(
                     RestApiResponseStatusCodes.BAD_REQUEST.getCode(),
                     ValidationMessages.DELETE_FAILED,
+                    null
+            ));
+        }
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<ResponseWrapper<List<Cart>>> getAllCartsByUserId(@PathVariable Long userId) {
+        List<Cart> carts = cartService.getAllCartsByUserId(userId);
+
+        if (carts != null && !carts.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.SUCCESS.getCode(),
+                    ValidationMessages.RETRIEVED,
+                    carts
+            ));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.NOT_FOUND.getCode(),
+                    ValidationMessages.RETRIEVED_FAILED,
                     null
             ));
         }
