@@ -8,6 +8,9 @@ import Menu from './pages/Menu';
 import Booking from './pages/Booking';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import ReserveTable from './pages/ReserveTable';
+import ReviewPage from './pages/ReviewPage';
+
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
         <Route path='/booking' element={<Booking />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/reserve-table' element={<ReserveTable />} />
+        <Route path='/review-page' element={<ReviewPage />} />
+
         {/* You can later add the Orders and Login routes here */}
       </Routes>
 
