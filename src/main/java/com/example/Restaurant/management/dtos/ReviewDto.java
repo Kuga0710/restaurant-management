@@ -9,6 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReviewDto {
+
+    private Long reviewId;
+
     @NotNull(message = "Name cannot be null")
     private String name;
 

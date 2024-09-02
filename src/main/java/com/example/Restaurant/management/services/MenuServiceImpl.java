@@ -51,7 +51,6 @@ public class MenuServiceImpl implements MenuService {
         List<Menu> menus = menuRepository.findByNameOrAll(name);
         return menus.stream().map(menu -> {
             MenuDto menuDto = new MenuDto();
-            menuDto.setMenuId(menu.getServiceId());
             BeanUtils.copyProperties(menu, menuDto);
             return menuDto;
         }).collect(Collectors.toList());

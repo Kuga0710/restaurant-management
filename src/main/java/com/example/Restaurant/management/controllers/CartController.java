@@ -1,6 +1,7 @@
 package com.example.Restaurant.management.controllers;
 
 import com.example.Restaurant.management.dtos.CartDto;
+import com.example.Restaurant.management.dtos.CartGetDto;
 import com.example.Restaurant.management.entities.Cart;
 import com.example.Restaurant.management.enums.RestApiResponseStatusCodes;
 import com.example.Restaurant.management.services.CartService;
@@ -45,8 +46,8 @@ public class CartController {
         boolean isDeleted = cartService.deleteAllCarts();
 
         if (isDeleted) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(
-                    RestApiResponseStatusCodes.CREATED.getCode(),
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.SUCCESS.getCode(),
                     ValidationMessages.DELETE_SUCCESS,
                     null
             ));
@@ -64,8 +65,8 @@ public class CartController {
         boolean isDeleted = cartService.deleteCartById(id);
 
         if (isDeleted) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(
-                    RestApiResponseStatusCodes.CREATED.getCode(),
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.SUCCESS.getCode(),
                     ValidationMessages.DELETE_SUCCESS,
                     null
             ));
@@ -78,9 +79,9 @@ public class CartController {
         }
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<ResponseWrapper<List<Cart>>> getAllCartsByUserId(@PathVariable Long userId) {
-        List<Cart> carts = cartService.getAllCartsByUserId(userId);
+    @GetMapping("/{userId}")
+    public ResponseEntity<ResponseWrapper<List<CartGetDto>>> getAllCartsByUserId(@PathVariable Long userId) {
+        List<CartGetDto> carts = cartService.getAllCartsByUserId(userId);
 
         if (carts != null && !carts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
@@ -97,5 +98,42 @@ public class CartController {
         }
     }
 
+    @PutMapping("/{cartId}/increase")
+    public ResponseEntity<ResponseWrapper<CartGetDto>> increaseQuantity(@PathVariable Long cartId) {
+        CartGetDto updatedCart = cartService.increaseCartQuantity(cartId);
+
+        if (updatedCart != null) {
+            return ResponseEntity.ok(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.SUCCESS.getCode(),
+                    ValidationMessages.UPDATE_SUCCESS,
+                    updatedCart
+            ));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.BAD_REQUEST.getCode(),
+                    ValidationMessages.UPDATE_FAILED,
+                    null
+            ));
+        }
+    }
+
+    @PutMapping("/{cartId}/decrease")
+    public ResponseEntity<ResponseWrapper<CartGetDto>> decreaseQuantity(@PathVariable Long cartId) {
+        CartGetDto updatedCart = cartService.decreaseCartQuantity(cartId);
+
+        if (updatedCart != null) {
+            return ResponseEntity.ok(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.SUCCESS.getCode(),
+                    ValidationMessages.UPDATE_SUCCESS,
+                    updatedCart
+            ));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.BAD_REQUEST.getCode(),
+                    ValidationMessages.UPDATE_FAILED,
+                    null
+            ));
+        }
+    }
 
 }

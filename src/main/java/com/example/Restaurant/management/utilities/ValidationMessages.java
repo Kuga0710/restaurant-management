@@ -9,5 +9,6 @@ public class ValidationMessages {
     public static final String DELETE_SUCCESS = "Delete successfully";
     public static final String DELETE_FAILED = "Delete Failed";
     public static final String VALIDATION_FAILED = "Validation failed. Please check the provided data.";
-
+    public static final String UPDATE_SUCCESS="Update successfully";
+    public static final String UPDATE_FAILED="Update failed";
 }
