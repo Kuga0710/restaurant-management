@@ -10,7 +10,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import ReserveTable from './pages/ReserveTable';
 import ReviewPage from './pages/ReviewPage';
-
+import CartItems from './pages/CartItems';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -27,13 +28,11 @@ function App() {
             <Nav className='me-auto justify-content-end w-100'>
               <Nav.Link as={Link} to="/" className='active text-uppercase'>Home</Nav.Link>
               <Nav.Link as={Link} to="/menu" className='text-uppercase'>Menu</Nav.Link>
-              <Nav.Link as={Link} to="/booking" className='text-uppercase'>Booking</Nav.Link>
+              <Nav.Link as={Link} to="/booking" className='text-uppercase'>Services</Nav.Link>
               <Nav.Link as={Link} to="/about" className='text-uppercase'>About</Nav.Link>
-              <Nav.Link as={Link} to="/contact" className='text-uppercase'>Contact</Nav.Link>
-              {/* Add button for Orders */}
-              <Nav.Link as={Link} to="/orders" className='btn btn-primary text-white ms-2'>Orders</Nav.Link>
-              {/* Add button for Login */}
-              <Nav.Link as={Link} to="/login" className='btn btn-secondary text-white ms-2'>Login</Nav.Link>
+              <Nav.Link as={Link} to="/orders" className='text-uppercase'>Basket</Nav.Link>
+              <Nav.Link as={Link} to="/login" className='text-uppercase'>Login</Nav.Link>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -47,8 +46,9 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/reserve-table' element={<ReserveTable />} />
         <Route path='/review-page' element={<ReviewPage />} />
+        <Route path='/orders' element={<CartItems />} />
+        <Route path="/login" element={<Login />} />
 
-        {/* You can later add the Orders and Login routes here */}
       </Routes>
 
       <footer className='bg-dark text-white'>

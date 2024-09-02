@@ -13,7 +13,7 @@ function BookingService() {
         { name: 'Table Reservation', description: 'Book your table in advance for a seamless dining experience.', link: '/reserve-table', icon: 'fa-calendar', buttonText: 'Reserve Now' },
         { name: 'Hall Booking', description: 'Book our hall for your special events and parties.', link: '/book-hall', icon: 'fa-building', buttonText: 'Book Now' },
         { name: 'Gift Cards', description: 'Purchase a gift card for your loved ones.', link: '/purchase-gift-card', icon: 'fa-gift', buttonText: 'Buy Now' },
-        { name: 'Make a Query', description: 'Reach out to us with any queries or special requests.', link: '/make-query', icon: 'fa-comment', buttonText: 'Contact Us' },
+        { name: 'Make a Query', description: 'Reach out to us with any queries or special requests.', link: '/contact', icon: 'fa-comment', buttonText: 'Contact Us' },
         { name: 'Give a Review', description: 'Share your dining experience with us.', link: '/review-page', icon: 'fa-star', buttonText: 'Review Now' }
     ];
 
