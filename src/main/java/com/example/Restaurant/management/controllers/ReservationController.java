@@ -13,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/reservation")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
 public class ReservationController {
 
     @Autowired
@@ -35,6 +37,24 @@ public class ReservationController {
                     RestApiResponseStatusCodes.BAD_REQUEST.getCode(),
                     ValidationMessages.SAVE_FAILED,
                     null
+            ));
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<ResponseWrapper<List<ReservationDto>>> getAllReviews() {
+        List<ReservationDto> reservationDtos = reservationService.getAllReservation();
+        if (reservationDtos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.BAD_REQUEST.getCode(),
+                    ValidationMessages.RETRIEVED_FAILED,
+                    null
+            ));
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
+                    RestApiResponseStatusCodes.SUCCESS.getCode(),
+                    ValidationMessages.RETRIEVED,
+                    reservationDtos
             ));
         }
     }

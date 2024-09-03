@@ -4,17 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-
-
 @Entity
 @Getter
 @Setter
-public class Cart {
+public class CartTemp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartId;
+    private Long cartTempId;
 
     private Integer quantity = 1;
 
@@ -29,8 +26,4 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "orders_id", nullable = false)
     private Orders orders;
-
-
 }
-
-

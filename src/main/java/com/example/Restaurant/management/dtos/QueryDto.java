@@ -3,6 +3,8 @@ package com.example.Restaurant.management.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 public class QueryDto {
@@ -12,5 +14,5 @@ public class QueryDto {
     private String email;
     private String subject;
     private String message;
-    private String createdAt;
+    private LocalDate createdAt;
 }

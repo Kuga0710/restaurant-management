@@ -2,6 +2,7 @@ package com.example.Restaurant.management.controllers;
 
 import com.example.Restaurant.management.dtos.CartDto;
 import com.example.Restaurant.management.dtos.CartGetDto;
+import com.example.Restaurant.management.dtos.OrdersDto;
 import com.example.Restaurant.management.entities.Cart;
 import com.example.Restaurant.management.enums.RestApiResponseStatusCodes;
 import com.example.Restaurant.management.services.CartService;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/cart")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
 public class CartController {
 
     @Autowired
@@ -39,26 +40,9 @@ public class CartController {
                     null
             ));
         }
+
     }
 
-    @DeleteMapping("/deleteAll")
-    public ResponseEntity<ResponseWrapper<Void>> deleteAllCarts() {
-        boolean isDeleted = cartService.deleteAllCarts();
-
-        if (isDeleted) {
-            return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
-                    RestApiResponseStatusCodes.SUCCESS.getCode(),
-                    ValidationMessages.DELETE_SUCCESS,
-                    null
-            ));
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper<>(
-                    RestApiResponseStatusCodes.BAD_REQUEST.getCode(),
-                    ValidationMessages.DELETE_FAILED,
-                    null
-            ));
-        }
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseWrapper<Void>> deleteCartById(@PathVariable Long id) {
@@ -81,7 +65,7 @@ public class CartController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<ResponseWrapper<List<CartGetDto>>> getAllCartsByUserId(@PathVariable Long userId) {
-        List<CartGetDto> carts = cartService.getAllCartsByUserId(userId);
+        List<CartGetDto> carts = cartService.getAllCartTempByUserId(userId);
 
         if (carts != null && !carts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
@@ -135,5 +119,16 @@ public class CartController {
             ));
         }
     }
+
+//    @PostMapping("/confirm-order")
+//    public ResponseEntity<Void> confirmOrder() {
+//        cartService.confirmOrder();
+//        return ResponseEntity.ok().build();
+//    }
+    @PostMapping("/confirm-order")
+    public ResponseEntity<Void> confirmOrder(@RequestBody OrdersDto ordersDto) {
+        cartService.confirmOrder(ordersDto);
+        return ResponseEntity.ok().build();
+}
 
 }

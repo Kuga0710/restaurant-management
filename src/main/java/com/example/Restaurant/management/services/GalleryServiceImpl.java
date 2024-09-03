@@ -1,13 +1,18 @@
 package com.example.Restaurant.management.services;
 
+import com.example.Restaurant.management.dtos.GalleryDto;
+import com.example.Restaurant.management.dtos.ReviewDto;
 import com.example.Restaurant.management.entities.Gallery;
+import com.example.Restaurant.management.entities.Review;
 import com.example.Restaurant.management.repositories.GalleryRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GalleryServiceImpl implements GalleryService {
@@ -61,13 +66,14 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public boolean deleteGallery(Long id) {
-        if (galleryRepository.existsById(id)) {
-            galleryRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public List<GalleryDto> getAllGallery() {
+        List<Gallery> galleries = galleryRepository.findAll();
+        return galleries.stream().map(gallery -> {
+        GalleryDto dto=new GalleryDto();
+        BeanUtils.copyProperties(gallery,dto);
+            return dto;
+        }).collect(Collectors.toList());
     }
+
 }
 

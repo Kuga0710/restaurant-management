@@ -14,4 +14,7 @@ public class CartDto {
     @NotNull(message = "MenuId is required")
     private Long menuId;
 
+    @NotNull(message = "OrderId is required")
+    private Long orderId;
+
 }

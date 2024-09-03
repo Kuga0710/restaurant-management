@@ -6,6 +6,7 @@ import com.example.Restaurant.management.enums.RestApiResponseStatusCodes;
 import com.example.Restaurant.management.services.UserService;
 import com.example.Restaurant.management.utilities.ResponseWrapper;
 import com.example.Restaurant.management.utilities.ValidationMessages;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,13 +17,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("api/v1/user")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<ResponseWrapper<User>> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<ResponseWrapper<User>> createUser(@Valid @RequestBody UserDto userDto) {
         User createdUser = userService.createUser(userDto);
         if (createdUser != null) {
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(
@@ -39,12 +41,12 @@ public class UserController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<ResponseWrapper<List<UserDto>>> getAllUsers(
-            @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "10") int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        List<UserDto> users = userService.getAllUsers(pageable);
+    @GetMapping("/users")
+    public ResponseEntity<ResponseWrapper<List<UserDto>>> getAllUsersByRole(
+            @RequestParam("role") String role) {
+
+        List<UserDto> users = userService.getAllUsersByRole(role);
+
         if (users != null && !users.isEmpty()) {
             return ResponseEntity.ok(new ResponseWrapper<>(
                     RestApiResponseStatusCodes.SUCCESS.getCode(),

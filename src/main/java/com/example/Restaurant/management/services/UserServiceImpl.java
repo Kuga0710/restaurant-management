@@ -1,5 +1,6 @@
 package com.example.Restaurant.management.services;
 
+import com.example.Restaurant.management.dtos.ReviewDto;
 import com.example.Restaurant.management.dtos.UserDto;
 import com.example.Restaurant.management.entities.User;
 import com.example.Restaurant.management.repositories.UserRepository;
@@ -21,26 +22,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User createUser(UserDto userDto) {
         User user = new User();
-        BeanUtils.copyProperties(userDto, user);
+        BeanUtils.copyProperties(userDto, user, "id","role");
         return userRepository.save(user);
     }
 
-    @Override
-    public List<UserDto> getAllUsers(Pageable pageable) {
-        Page<User> userPage = userRepository.findAll(pageable);
 
-//        if (userPage.isEmpty()) {
-//            throw new ResourceNotFoundException(ValidationMessages.NO_RECORDS_FOUND);
-//        }
-
-        return userPage.getContent().stream()
-                .map(user -> {
-                    UserDto userDto = new UserDto();
-                    BeanUtils.copyProperties(user, userDto);
-                    return userDto;
-                })
-                .collect(Collectors.toList());
-    }
 
     @Override
     public User updateUser(Long id, UserDto userDto) {
@@ -60,6 +46,16 @@ public class UserServiceImpl implements UserService{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<UserDto> getAllUsersByRole(String role) {
+        List<User> users = userRepository.findByRole(role);
+        return users.stream().map(user -> {
+        UserDto dto=new UserDto();
+        BeanUtils.copyProperties(user, dto);
+            return dto;
+        }).collect(Collectors.toList());
     }
 
 }
